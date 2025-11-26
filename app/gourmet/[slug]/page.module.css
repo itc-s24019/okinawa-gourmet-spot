@@ -1,0 +1,125 @@
+/*
+ * 詳細ページ全体 (mainタグに適用)
+ */
+.container {
+  max-width: 900px; /* PCでの最大幅 */
+  margin: 40px auto; /* ページ中央に配置 */
+  padding: 0 20px; /* 左右にパディング */
+  font-family: sans-serif;
+}
+
+/*
+ * 店名 (h1)
+ */
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  border-bottom: 3px solid #f0a500; /* アクセントカラー */
+  padding-bottom: 10px;
+}
+
+/*
+ * メイン画像
+ */
+.mainImage {
+  width: 100%;
+  max-height: 450px;
+  object-fit: cover; /* 画像がコンテナに収まるようにトリミング */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+}
+
+/*
+ * 各セクション (お店の説明、基本情報など)
+ */
+.section {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  color: #555;
+  border-left: 5px solid #007bff; /* セクションタイトルの左に青いライン */
+  padding-left: 10px;
+  margin-bottom: 15px;
+}
+
+/*
+ * 説明文
+ */
+.description {
+  line-height: 1.8;
+  color: #444;
+  font-size: 1.1rem;
+}
+
+/*
+ * 基本情報 (住所、カテゴリ)
+ */
+.infoText {
+  display: flex;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.infoLabel {
+  font-weight: bold;
+  color: #007bff;
+  width: 100px; /* ラベルの幅を固定 */
+  flex-shrink: 0;
+}
+
+/* ---------------------------------------------------- */
+/* ★ 追加: 戻るボタンのスタイル */
+/* ---------------------------------------------------- */
+.backLinkContainer {
+  /* ボタンを中央のコンテンツに合わせるためのマージン */
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+.backLinkButton {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #f0f0f0; /* 薄いグレーの背景 */
+  color: #333; /* 文字色 */
+  text-decoration: none; /* 下線を削除 */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: background-color 0.2s, color 0.2s;
+  font-weight: bold;
+}
+
+/* マウスオーバー時のスタイル */
+.backLinkButton:hover {
+  background-color: #e0e0e0;
+  color: #000;
+}
+
+/*
+ * レスポンシブ対応 (スマートフォン向け)
+ */
+@media (max-width: 768px) {
+  .container {
+    margin: 20px auto;
+    padding: 0 15px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .mainImage {
+    max-height: 300px;
+  }
+
+  .infoLabel {
+    width: 80px;
+  }
+}

@@ -1,94 +1,51 @@
-import Image from "next/image";
 import styles from "./page.module.css";
+// ★ 1. next/link をインポート
+import Link from "next/link";
+import { client } from ".././libs/client";
 
-export default function Home() {
+// ★ 2. slug フィールドを型定義に追加
+type Gourmet = {
+  id: string;
+  title: string;
+  description: string;
+  image: {
+    url: string;
+  };
+  address?: string;
+  category?: string;
+  slug: string; // ★ microCMSで追加したスラッグ
+};
+
+export default async function Home() {
+  const data = await client.get({
+    endpoint: "gourmet",
+  });
+
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
+      <h1 className={styles.title}>沖縄おすすめグルメ特集 🍜</h1>
       <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+        {data.contents.map((item: Gourmet) => (
+          // ★ 3 & 4. div を Link に置き換え、hrefを設定
+          <Link
+            key={item.id}
+            href={`/gourmet/${item.slug}`}
+            className={styles.card} // 既存のスタイルを適用
+          >
+            <img
+              src={item.image.url}
+              alt={item.title}
+              className={styles.image}
+            />
+            <h2>{item.title}</h2>
+            {/* description は詳細ページでのみ表示する場合、ここから削除してもOKです */}
+            <p>{item.description}</p>
+            {item.address && <p className={styles.address}>📍{item.address}</p>}
+            {item.category && (
+              <p className={styles.category}>#{item.category}</p>
+            )}
+          </Link>
+        ))}
       </div>
     </main>
   );
