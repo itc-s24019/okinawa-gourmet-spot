@@ -28,23 +28,34 @@ app/page.tsx ▶ microCMSからすべてのグルメ情報を取得し、概要�
 
 app/gourmet/[slug]/page.tsx ▶ URLの[slug]（例: mame_porepore）に基づいて、microCMSから個別のグルメ情報を取得し、詳細を表示します。
 
+pp/gourmet/[slug]/page.tsx　▶　詳細ページ本体。URLの[slug]に基づきmicroCMSからデータを取得し、UIを生成。
+
+app/gourmet/[slug]/page.module.css　▶　詳細ページ専用のスタイル定義。
+
+libs/　▶　外部サービスとの連携ロジックを格納。
+
+libs/client.ts　▶　microCMS接続クライアントの初期化と設定。
+
+public/　▶　画像などの静的アセットを格納（Webルートから直接アクセス可能）。
+
+package.json　▶　プロジェクトの依存関係と実行スクリプト定義。
+
+README.md　▶　プロジェクトの概要と説明。
+
+... (その他)　▶	Next.jsやTypeScriptのその他の設定ファイル。
+
+
 
 📁 3. ディレクトリ構成
 主要なコードや設定ファイルは以下の通りです。
 
-okinawa-travel2/
-├── app/
-│ ├── gourmet/ # 詳細ページ（動的ルーティング）を定義するフォルダ
-│ │ └── [slug]/
-│ │ ├── page.tsx # 詳細ページ本体のロジックと UI
-│ │ └── page.module.css # 詳細ページ専用のスタイル
-│ ├── page.tsx # トップページ（一覧）本体のロジックと UI
-│ └── page.module.css # トップページ専用のスタイル
-├── libs/
-│ └── client.ts # microCMS 接続クライアント定義
-├── public/ # 画像などの静的ファイルを格納
-├── package.json # プロジェクトの依存関係とスクリプト定義
-└── ... (その他の設定ファイル)
+app/page.tsx　▶トップページ（一覧）のデータ取得とUIロジック。
+
+app/page.module.css		トップページ（一覧）専用のスタイル定義。
+
+app/gourmet/[slug]/		動的ルーティングによる詳細ページ群を定義するファイル
+
+
 
 📡 4. microCMS へのアクセス処理
 本プロジェクトでは、@microcms/sdk を使用して microCMS からデータを取得しています。
