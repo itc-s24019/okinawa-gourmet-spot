@@ -57,6 +57,9 @@ app/gourmet/[slug]/		動的ルーティングによる詳細ページ群を定�
 
 
 
+
+
+
 📡 4. microCMS へのアクセス処理
 本プロジェクトでは、@microcms/sdk を使用して microCMS からデータを取得しています。
 
